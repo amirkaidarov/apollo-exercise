@@ -1,0 +1,20 @@
+DROP DATABASE IF EXISTS test_vehicles;
+CREATE DATABASE test_vehicles;
+\c test_vehicles 
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS citext;  
+
+CREATE TABLE VEHICLES (
+    VID varchar NOT NULL DEFAULT uuid_generate_v4(), 
+    VIN citext NOT NULL,
+    MANUFACTURER_NAME varchar NOT NULL,
+    DESCRIPTION varchar NOT NULL,
+    HORSE_POWER int NOT NULL,
+    MODEL_NAME varchar NOT NULL,
+    MODEL_YEAR int NOT NULL,
+    PURCHASE_PRICE decimal(20, 2) NOT NULL,
+    FUEL_TYPE varchar NOT NULL,
+    CONSTRAINT VEHICLE_pk PRIMARY KEY (VID),
+    CONSTRAINT VIN_uniq UNIQUE (VIN)
+);
